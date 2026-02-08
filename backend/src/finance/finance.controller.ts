@@ -1,6 +1,8 @@
 import { Controller, Get, Post, Put, Delete, Body, UseGuards, Request, Param } from '@nestjs/common';
 import { FinanceService } from './finance.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { CreateTransactionDto } from './dto/create-transaction.dto';
+import { CreateFixedExpenseDto } from './dto/create-fixed-expense.dto';
 
 @Controller('finance')
 @UseGuards(JwtAuthGuard)
@@ -18,7 +20,7 @@ export class FinanceController {
   }
 
   @Post('transactions')
-  createTransaction(@Request() req: any, @Body() transaction: any) {
+  createTransaction(@Request() req: any, @Body() transaction: CreateTransactionDto) {
     return this.financeService.createTransaction(req.user.userId, transaction);
   }
 
@@ -28,12 +30,12 @@ export class FinanceController {
   }
 
   @Post('fixed-expenses')
-  createFixedExpense(@Request() req: any, @Body() data: any) {
+  createFixedExpense(@Request() req: any, @Body() data: CreateFixedExpenseDto) {
     return this.financeService.createFixedExpense(req.user.userId, data);
   }
 
   @Put('fixed-expenses/:id')
-  updateFixedExpense(@Request() req: any, @Param('id') id: string, @Body() data: any) {
+  updateFixedExpense(@Request() req: any, @Param('id') id: string, @Body() data: CreateFixedExpenseDto) {
     return this.financeService.updateFixedExpense(req.user.userId, parseInt(id), data);
   }
 

@@ -67,9 +67,9 @@ export class FinanceService {
   async createTransaction(userId: number, data: any) {
     return this.prisma.transaction.create({
       data: {
-        amount: parseFloat(data.amount),
+        amount: Number(data.amount),
         description: data.description,
-        categoryId: parseInt(data.categoryId),
+        categoryId: Number(data.categoryId),
         date: new Date(data.date),
         userId,
       },
@@ -86,10 +86,10 @@ export class FinanceService {
   async createFixedExpense(userId: number, data: any) {
     return this.prisma.fixedExpense.create({
       data: {
-        amount: parseFloat(data.amount),
+        amount: Number(data.amount),
         description: data.description,
         dueDate: data.dueDate.toString(),
-        categoryId: parseInt(data.categoryId),
+        categoryId: Number(data.categoryId),
         userId,
       },
     });
@@ -99,10 +99,10 @@ export class FinanceService {
     return this.prisma.fixedExpense.updateMany({
       where: { id, userId },
       data: {
-        amount: parseFloat(data.amount),
+        amount: Number(data.amount),
         description: data.description,
         dueDate: data.dueDate.toString(),
-        categoryId: parseInt(data.categoryId),
+        categoryId: Number(data.categoryId),
       },
     });
   }
