@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinancePro | App Settings &amp; Preferences</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab {
+            background-color: #135bec;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #232f48;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between border-b border-solid border-slate-200 dark:border-[#232f48] bg-white dark:bg-background-dark px-6 py-3 lg:px-40 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">FinancePro</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Reports</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Budgets</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Investments</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden sm:flex items-stretch rounded-lg h-10 w-full max-w-64 bg-slate-100 dark:bg-[#232f48]">
+<div class="flex items-center justify-center pl-4 text-slate-400">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="w-full bg-transparent border-none focus:ring-0 text-sm px-3 placeholder:text-slate-400" placeholder="Search settings..." type="text"/>
+</label>
+<div class="flex items-center gap-3">
+<button class="text-slate-500 dark:text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full border-2 border-primary bg-cover bg-center" data-alt="User profile avatar circle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCkV98MPJg-zSr_pXYchCKJ8zaSDJP9UI_YgcRR_6bdS_jM-kfwvwID7j_d_qRlPbyR0AtfcrNIwvArN5TB7d6EN5VvZy-dwIH1R8iGWgg8YQXDmYLR8xQO9uk-5EKobtwxqXWpKlBdQzVJwnQVphsgE9fa8tio13ajzzL93hVz7WI6qvv6JNbYI6OFhtnfKeuNCLELom0VMU9S-nv8rOPwTwEtSVl4CMjsi6R8O3mhJcIC4ZZDiedk5XqptcV8jblHTkQPSbIBq3c')"></div>
+</div>
+</div>
+</header>
+<!-- Main Layout -->
+<main class="flex-1 lg:px-40 py-8">
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Sidebar Menu -->
+<aside class="w-full lg:w-64 flex flex-col gap-2">
+<div class="px-4 mb-4">
+<h1 class="text-2xl font-black tracking-tight">Settings</h1>
+<p class="text-slate-500 text-sm">Manage your account and app preferences</p>
+</div>
+<nav class="flex flex-col gap-1 px-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary text-white font-semibold" href="#profile">
+<span class="material-symbols-outlined">person</span>
+<span>Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-[#232f48] text-slate-600 dark:text-slate-400 font-medium transition-colors" href="#security">
+<span class="material-symbols-outlined">shield</span>
+<span>Security</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-[#232f48] text-slate-600 dark:text-slate-400 font-medium transition-colors" href="#localization">
+<span class="material-symbols-outlined">language</span>
+<span>Currency &amp; Locale</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-[#232f48] text-slate-600 dark:text-slate-400 font-medium transition-colors" href="#categories">
+<span class="material-symbols-outlined">category</span>
+<span>Custom Categories</span>
+</a>
+<div class="my-4 border-t border-slate-200 dark:border-[#232f48]"></div>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-[#232f48] text-slate-600 dark:text-slate-400 font-medium transition-colors" href="#notifications">
+<span class="material-symbols-outlined">notifications</span>
+<span>Notifications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-[#232f48] text-slate-600 dark:text-slate-400 font-medium transition-colors" href="#billing">
+<span class="material-symbols-outlined">credit_card</span>
+<span>Billing &amp; Subscription</span>
+</a>
+</nav>
+</aside>
+<!-- Content Area -->
+<div class="flex-1 flex flex-col gap-8 px-4 lg:px-0">
+<!-- Profile Section -->
+<section class="bg-white dark:bg-[#192233] rounded-xl p-6 shadow-sm border border-slate-200 dark:border-[#232f48]" id="profile">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold">Personal Information</h3>
+<button class="bg-primary hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-bold text-sm transition-colors">Save Changes</button>
+</div>
+<div class="flex flex-col @[520px]:flex-row gap-6 mb-8 items-start @[520px]:items-center">
+<div class="relative group">
+<div class="bg-slate-200 dark:bg-[#232f48] aspect-square rounded-full h-24 w-24 bg-cover bg-center border-4 border-white dark:border-[#192233]" data-alt="User profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDxpW9hBo1BjCojCZph9yDvPFw0Ip1dpvIcJve35BvdiBHANLMKwROwrOLDo1yH5g0cRw7zLctECWn7iEREe1BMzYpOUgBsSsO0wugMxlRClUUunoHGhBn7rP_eE1AUddvp1OG19n6sOJ4kczF08QZgLTG7RyUpjm-z7v_sZxdMNS3IbZc-wwpV9T5AsKWYO1hydd6my0PreGC1I0IcxWwXGuD3UzJQjQGIpJMivWAg50aqqlit4FlqCl-_pnFAIJNVRE9TGf8sV1U')"></div>
+<button class="absolute bottom-0 right-0 bg-primary text-white p-1.5 rounded-full border-2 border-white dark:border-[#192233]">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<h4 class="text-lg font-bold">Alex Johnson</h4>
+<p class="text-slate-500 text-sm">Profile picture should be at least 400x400px</p>
+<button class="mt-2 text-primary font-bold text-sm hover:underline">Remove Avatar</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-600 dark:text-slate-400">First Name</label>
+<input class="bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-[#324467] rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" type="text" value="Alex"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-600 dark:text-slate-400">Last Name</label>
+<input class="bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-[#324467] rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" type="text" value="Johnson"/>
+</div>
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="text-sm font-semibold text-slate-600 dark:text-slate-400">Email Address</label>
+<input class="bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-[#324467] rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" type="email" value="alex.johnson@example.com"/>
+</div>
+</div>
+</section>
+<!-- Security Section -->
+<section class="bg-white dark:bg-[#192233] rounded-xl p-6 shadow-sm border border-slate-200 dark:border-[#232f48]" id="security">
+<h3 class="text-xl font-bold mb-6">Account Security</h3>
+<div class="flex flex-col gap-6 max-w-xl">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-600 dark:text-slate-400">Current Password</label>
+<input class="bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-[#324467] rounded-lg p-3 outline-none" placeholder="••••••••" type="password"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-600 dark:text-slate-400">New Password</label>
+<input class="bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-[#324467] rounded-lg p-3 outline-none" placeholder="••••••••" type="password"/>
+<div class="mt-2 flex gap-1 h-1.5">
+<div class="flex-1 bg-green-500 rounded-full"></div>
+<div class="flex-1 bg-green-500 rounded-full"></div>
+<div class="flex-1 bg-green-500 rounded-full"></div>
+<div class="flex-1 bg-slate-200 dark:bg-[#232f48] rounded-full"></div>
+</div>
+<p class="text-xs text-slate-500 mt-1">Strength: <span class="text-green-500 font-bold">Strong</span>. Include numbers and symbols.</p>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-600 dark:text-slate-400">Confirm New Password</label>
+<input class="bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-[#324467] rounded-lg p-3 outline-none" placeholder="••••••••" type="password"/>
+</div>
+<button class="bg-slate-100 dark:bg-[#232f48] hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white px-6 py-2.5 rounded-lg font-bold text-sm transition-colors w-fit">Update Password</button>
+</div>
+</section>
+<!-- Currency & Localization Section -->
+<section class="bg-white dark:bg-[#192233] rounded-xl p-6 shadow-sm border border-slate-200 dark:border-[#232f48]" id="localization">
+<h3 class="text-xl font-bold mb-2">Regional Settings</h3>
+<p class="text-slate-500 text-sm mb-8">Select your primary currency and preferred formats.</p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+<label class="relative cursor-pointer">
+<input checked="" class="peer sr-only" name="currency" type="radio" value="USD"/>
+<div class="p-4 border-2 border-slate-200 dark:border-[#232f48] rounded-xl peer-checked:border-primary peer-checked:bg-primary/5 transition-all flex flex-col items-center gap-2">
+<span class="text-2xl">🇺🇸</span>
+<span class="font-bold">USD</span>
+<span class="text-xs text-slate-500 text-center">US Dollar ($)</span>
+</div>
+<div class="absolute top-2 right-2 hidden peer-checked:block">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+</div>
+</label>
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="currency" type="radio" value="EUR"/>
+<div class="p-4 border-2 border-slate-200 dark:border-[#232f48] rounded-xl peer-checked:border-primary peer-checked:bg-primary/5 transition-all flex flex-col items-center gap-2">
+<span class="text-2xl">🇪🇺</span>
+<span class="font-bold">EUR</span>
+<span class="text-xs text-slate-500 text-center">Euro (€)</span>
+</div>
+<div class="absolute top-2 right-2 hidden peer-checked:block">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+</div>
+</label>
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="currency" type="radio" value="MXN"/>
+<div class="p-4 border-2 border-slate-200 dark:border-[#232f48] rounded-xl peer-checked:border-primary peer-checked:bg-primary/5 transition-all flex flex-col items-center gap-2">
+<span class="text-2xl">🇲🇽</span>
+<span class="font-bold">MXN</span>
+<span class="text-xs text-slate-500 text-center">Mexican Peso ($)</span>
+</div>
+<div class="absolute top-2 right-2 hidden peer-checked:block">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+</div>
+</label>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-600 dark:text-slate-400">Date Format</label>
+<select class="bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-[#324467] rounded-lg p-3 outline-none">
+<option>MM/DD/YYYY</option>
+<option>DD/MM/YYYY</option>
+<option>YYYY-MM-DD</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-600 dark:text-slate-400">Timezone</label>
+<select class="bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-[#324467] rounded-lg p-3 outline-none">
+<option>(GMT-08:00) Pacific Time</option>
+<option>(GMT-05:00) Eastern Time</option>
+<option>(GMT+00:00) London</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Custom Categories Section -->
+<section class="bg-white dark:bg-[#192233] rounded-xl p-6 shadow-sm border border-slate-200 dark:border-[#232f48]" id="categories">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-xl font-bold">Budget Categories</h3>
+<button class="flex items-center gap-2 text-primary font-bold text-sm bg-primary/10 px-4 py-2 rounded-lg hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+                                Add Category
+                            </button>
+</div>
+<p class="text-slate-500 text-sm mb-8">Personalize your spending categories for better tracking.</p>
+<div class="space-y-3">
+<!-- Category Row -->
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-background-dark/50 border border-slate-100 dark:border-[#232f48] rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-500">
+<span class="material-symbols-outlined">shopping_cart</span>
+</div>
+<div>
+<h5 class="font-bold">Groceries</h5>
+<p class="text-xs text-slate-500">Food, supermarket, daily essentials</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full bg-emerald-500 cursor-pointer border-2 border-white dark:border-[#192233] ring-1 ring-slate-200 dark:ring-slate-700"></div>
+<div class="flex gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Category Row -->
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-background-dark/50 border border-slate-100 dark:border-[#232f48] rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-500">
+<span class="material-symbols-outlined">home</span>
+</div>
+<div>
+<h5 class="font-bold">Rent &amp; Utilities</h5>
+<p class="text-xs text-slate-500">Monthly apartment and service bills</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full bg-blue-500 cursor-pointer border-2 border-white dark:border-[#192233] ring-1 ring-slate-200 dark:ring-slate-700"></div>
+<div class="flex gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Category Row -->
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-background-dark/50 border border-slate-100 dark:border-[#232f48] rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-500">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div>
+<h5 class="font-bold">Dining Out</h5>
+<p class="text-xs text-slate-500">Restaurants, bars, coffee shops</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full bg-amber-500 cursor-pointer border-2 border-white dark:border-[#192233] ring-1 ring-slate-200 dark:ring-slate-700"></div>
+<div class="flex gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Category Row -->
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-background-dark/50 border border-slate-100 dark:border-[#232f48] rounded-xl">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-500">
+<span class="material-symbols-outlined">movie</span>
+</div>
+<div>
+<h5 class="font-bold">Entertainment</h5>
+<p class="text-xs text-slate-500">Streaming, events, and hobbies</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full bg-purple-500 cursor-pointer border-2 border-white dark:border-[#192233] ring-1 ring-slate-200 dark:ring-slate-700"></div>
+<div class="flex gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-100 dark:border-[#232f48] flex justify-center">
+<button class="text-slate-500 text-sm font-medium hover:text-primary transition-colors">Load default categories</button>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Sticky Footer -->
+<footer class="lg:hidden sticky bottom-0 bg-white dark:bg-[#192233] border-t border-slate-200 dark:border-[#232f48] p-4 flex gap-3">
+<button class="flex-1 bg-primary text-white py-3 rounded-xl font-bold transition-transform active:scale-95">Save Changes</button>
+<button class="flex-1 bg-slate-100 dark:bg-[#232f48] text-slate-900 dark:text-white py-3 rounded-xl font-bold transition-transform active:scale-95">Cancel</button>
+</footer>
+</div>
+</body></html>

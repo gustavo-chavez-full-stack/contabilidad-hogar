@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Transaction History &amp; Filters</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between gap-8">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="bg-primary p-1.5 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl">account_balance_wallet</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">FinanceTracker</h1>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-semibold text-primary border-b-2 border-primary py-5" href="#">Transactions</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Accounts</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Planning</a>
+</nav>
+</div>
+<div class="flex items-center gap-4 flex-1 max-w-md">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="Search transactions..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden ml-2">
+<img class="w-full h-full object-cover" data-alt="User profile avatar of a professional" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrlKnABypywl4yOPZyPlZUoCUaf4XJaOCnzdrKixF3lOxge8kHjDljpaga32T9rAT0SH4zHutfouebmxA2x6wv4_DvBcWNh0pfCs1cbwqlIqO2e0einRxW3Dkc6JN_-YtMqpkXL_fSf_JLNKaVDcQ1eTJQ3BuehhLeoky9JJubm7jHIvJo7k3rVVDUTKquPWU060v6sKisQQoMKnl6g2M6oUtlI0A0JB1s4TeelFbL25SyCZRoYmqraYSP3Wox24a4DixfTUNEU2Q"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-6 py-8">
+<!-- Header & Primary Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+<div>
+<h2 class="text-3xl font-extrabold tracking-tight">Transaction History</h2>
+<p class="text-slate-500 mt-1">Review and manage 1,248 total transactions across your accounts.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+                    Export
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-primary rounded-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg">add</span>
+                    Add Transaction
+                </button>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6 bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-bold uppercase tracking-wider text-slate-400">Date Range</label>
+<div class="relative cursor-pointer group">
+<select class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg py-2 pl-3 pr-10 text-sm appearance-none focus:ring-primary focus:border-primary">
+<option>Last 30 Days</option>
+<option>Last 90 Days</option>
+<option>Current Year</option>
+<option>Custom Range</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none group-hover:text-primary transition-colors">calendar_today</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-bold uppercase tracking-wider text-slate-400">Category</label>
+<div class="relative cursor-pointer group">
+<select class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg py-2 pl-3 pr-10 text-sm appearance-none focus:ring-primary focus:border-primary">
+<option>All Categories</option>
+<option>Housing</option>
+<option>Food &amp; Dining</option>
+<option>Shopping</option>
+<option>Income</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">category</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-bold uppercase tracking-wider text-slate-400">Account</label>
+<div class="relative cursor-pointer group">
+<select class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg py-2 pl-3 pr-10 text-sm appearance-none focus:ring-primary focus:border-primary">
+<option>All Accounts</option>
+<option>Main Checking (***482)</option>
+<option>Savings (***920)</option>
+<option>Amex Platinum (***102)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">payments</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-bold uppercase tracking-wider text-slate-400">Status</label>
+<div class="relative cursor-pointer group">
+<select class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg py-2 pl-3 pr-10 text-sm appearance-none focus:ring-primary focus:border-primary">
+<option>All Statuses</option>
+<option>Completed</option>
+<option>Pending</option>
+<option>Flagged</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">info</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5 justify-end">
+<button class="w-full bg-primary/10 hover:bg-primary/20 text-primary font-bold py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">filter_alt_off</span>
+                    Clear Filters
+                </button>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[1000px]">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 cursor-pointer hover:text-primary transition-colors">
+<div class="flex items-center gap-1">
+                                    Date
+                                    <span class="material-symbols-outlined text-sm">arrow_downward</span>
+</div>
+</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Description</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Category</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Account</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right cursor-pointer hover:text-primary transition-colors">
+<div class="flex items-center justify-end gap-1">
+                                    Amount
+                                    <span class="material-symbols-outlined text-sm">unfold_more</span>
+</div>
+</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right w-16"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4 text-sm tabular-nums text-slate-600 dark:text-slate-400 font-medium">Oct 24, 2023</td>
+<td class="px-6 py-4 text-sm font-semibold">Starbucks Coffee #492</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 px-2.5 py-1 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 rounded-lg text-xs font-bold w-fit">
+<span class="material-symbols-outlined text-sm">coffee</span>
+                                    Food &amp; Drink
+                                </div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Main Checking</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                    Completed
+                                </div>
+</td>
+<td class="px-6 py-4 text-right text-sm font-extrabold tabular-nums text-red-500">-$6.50</td>
+<td class="px-6 py-4 text-right">
+<button class="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-all">
+<span class="material-symbols-outlined text-slate-400">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4 text-sm tabular-nums text-slate-600 dark:text-slate-400 font-medium">Oct 23, 2023</td>
+<td class="px-6 py-4 text-sm font-semibold">Employer Corp - Payroll</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 px-2.5 py-1 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 rounded-lg text-xs font-bold w-fit">
+<span class="material-symbols-outlined text-sm">payments</span>
+                                    Salary
+                                </div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Savings Account</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                    Completed
+                                </div>
+</td>
+<td class="px-6 py-4 text-right text-sm font-extrabold tabular-nums text-emerald-500">+$4,500.00</td>
+<td class="px-6 py-4 text-right">
+<button class="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-all">
+<span class="material-symbols-outlined text-slate-400">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4 text-sm tabular-nums text-slate-600 dark:text-slate-400 font-medium">Oct 22, 2023</td>
+<td class="px-6 py-4 text-sm font-semibold">Amazon.com Marketplace</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 rounded-lg text-xs font-bold w-fit">
+<span class="material-symbols-outlined text-sm">shopping_cart</span>
+                                    Shopping
+                                </div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Credit Card</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-slate-400 text-xs font-bold italic">
+<span class="material-symbols-outlined text-sm">history</span>
+                                    Pending
+                                </div>
+</td>
+<td class="px-6 py-4 text-right text-sm font-extrabold tabular-nums text-red-500">-$42.19</td>
+<td class="px-6 py-4 text-right">
+<button class="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-all">
+<span class="material-symbols-outlined text-slate-400">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4 text-sm tabular-nums text-slate-600 dark:text-slate-400 font-medium">Oct 21, 2023</td>
+<td class="px-6 py-4 text-sm font-semibold">Landlord Inc - Rent</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-400 rounded-lg text-xs font-bold w-fit">
+<span class="material-symbols-outlined text-sm">home</span>
+                                    Housing
+                                </div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Main Checking</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                    Completed
+                                </div>
+</td>
+<td class="px-6 py-4 text-right text-sm font-extrabold tabular-nums text-red-500">-$2,100.00</td>
+<td class="px-6 py-4 text-right">
+<button class="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-all">
+<span class="material-symbols-outlined text-slate-400">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4 text-sm tabular-nums text-slate-600 dark:text-slate-400 font-medium">Oct 20, 2023</td>
+<td class="px-6 py-4 text-sm font-semibold">Apple.com Services</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 px-2.5 py-1 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-400 rounded-lg text-xs font-bold w-fit">
+<span class="material-symbols-outlined text-sm">subscriptions</span>
+                                    Services
+                                </div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Credit Card</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                    Completed
+                                </div>
+</td>
+<td class="px-6 py-4 text-right text-sm font-extrabold tabular-nums text-red-500">-$14.99</td>
+<td class="px-6 py-4 text-right">
+<button class="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-all">
+<span class="material-symbols-outlined text-slate-400">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4 text-sm tabular-nums text-slate-600 dark:text-slate-400 font-medium">Oct 19, 2023</td>
+<td class="px-6 py-4 text-sm font-semibold">Dividend Payout - VTI</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 px-2.5 py-1 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 rounded-lg text-xs font-bold w-fit">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                                    Investment
+                                </div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Brokerage Account</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                    Completed
+                                </div>
+</td>
+<td class="px-6 py-4 text-right text-sm font-extrabold tabular-nums text-emerald-500">+$124.50</td>
+<td class="px-6 py-4 text-right">
+<button class="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-all">
+<span class="material-symbols-outlined text-slate-400">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<p class="text-sm text-slate-500">
+                        Showing <span class="font-bold text-slate-700 dark:text-slate-200">1</span> to <span class="font-bold text-slate-700 dark:text-slate-200">10</span> of <span class="font-bold text-slate-700 dark:text-slate-200">1,248</span> results
+                    </p>
+<div class="flex items-center gap-2 ml-4 border-l border-slate-200 dark:border-slate-800 pl-4">
+<label class="text-xs font-medium text-slate-400 uppercase">Rows per page</label>
+<select class="bg-transparent border-none text-sm font-bold focus:ring-0 p-0 cursor-pointer">
+<option>10</option>
+<option>25</option>
+<option>50</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 transition-all disabled:opacity-30 disabled:pointer-events-none" disabled="">
+<span class="material-symbols-outlined">first_page</span>
+</button>
+<button class="p-1.5 rounded-lg text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 transition-all disabled:opacity-30 disabled:pointer-events-none" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex items-center gap-1 mx-2">
+<button class="w-8 h-8 rounded-lg bg-primary text-white text-sm font-bold">1</button>
+<button class="w-8 h-8 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 text-sm font-medium transition-colors">2</button>
+<button class="w-8 h-8 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 text-sm font-medium transition-colors">3</button>
+<span class="text-slate-400 px-1 text-sm">...</span>
+<button class="w-8 h-8 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 text-sm font-medium transition-colors">125</button>
+</div>
+<button class="p-1.5 rounded-lg text-slate-500 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<button class="p-1.5 rounded-lg text-slate-500 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+<span class="material-symbols-outlined">last_page</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Summary Stats Banner (Contextual) -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-5 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">Total Income (Selected Period)</span>
+<span class="material-symbols-outlined text-emerald-500">trending_up</span>
+</div>
+<div class="text-2xl font-black text-emerald-600 dark:text-emerald-400 tabular-nums">+$12,450.00</div>
+</div>
+<div class="p-5 bg-red-500/10 border border-red-500/20 rounded-xl">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-widest">Total Expenses (Selected Period)</span>
+<span class="material-symbols-outlined text-red-500">trending_down</span>
+</div>
+<div class="text-2xl font-black text-red-600 dark:text-red-400 tabular-nums">-$8,124.32</div>
+</div>
+<div class="p-5 bg-primary/10 border border-primary/20 rounded-xl">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-primary uppercase tracking-widest">Net Cash Flow</span>
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<div class="text-2xl font-black text-primary tabular-nums">+$4,325.68</div>
+</div>
+</div>
+</main>
+<!-- Footer Meta -->
+<footer class="mt-12 py-8 border-t border-slate-200 dark:border-slate-800 text-center">
+<p class="text-xs text-slate-500 font-medium">© 2024 FinanceTracker Pro. Data encrypted with 256-bit SSL.</p>
+</footer>
+</body></html>

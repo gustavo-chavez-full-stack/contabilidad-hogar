@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  username      String         @unique
+  email         String?        @unique
+  password      String?
+  createdAt     DateTime       @default(now()) @map("created_at")
+  transactions  Transaction[]
+  fixedExpenses FixedExpense[]
+
+  @@map("users")
+}
+
+model Category {
+  id            Int            @id @default(autoincrement())
+  name          String
+  type          String         // 'income' or 'expense'
+  icon          String?
+  transactions  Transaction[]
+  fixedExpenses FixedExpense[]
+
+  @@map("categories")
+}
+
+model Transaction {
+  id          Int      @id @default(autoincrement())
+  userId      Int      @map("user_id")
+  user        User     @relation(fields: [userId], references: [id])
+  categoryId  Int?     @map("category_id")
+  category    Category? @relation(fields: [categoryId], references: [id])
+  date        DateTime
+  description String
+  amount      Float
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("transactions")
+}
+
+model FixedExpense {
+  id          Int      @id @default(autoincrement())
+  userId      Int      @map("user_id")
+  user        User     @relation(fields: [userId], references: [id])
+  categoryId  Int?     @map("category_id")
+  category    Category? @relation(fields: [categoryId], references: [id])
+  description String
+  amount      Float
+  dueDate     String   @map("due_date")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("fixed_expenses")
+}
